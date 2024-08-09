@@ -76,7 +76,7 @@ STATIC_ROOT = BASE_DIR/ 'static'
 STATIC_URL = '/static/'
 
 WSGI_APPLICATION = "myproject.wsgi.application"
-
+ASGI_APPLICATION = "myproject.asgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases

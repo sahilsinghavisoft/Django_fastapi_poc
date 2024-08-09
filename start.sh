@@ -5,7 +5,7 @@ python manage.py makemigrations
 python manage.py migrate
 # Start Django server using Gunicorn
 echo "Starting Django..."
-poetry run gunicorn --bind 0.0.0.0:8000 myproject.wsgi:application &
+poetry run uvicorn myproject.asgi:application --host 0.0.0.0 --port 8000 &
 # Create a superuser if not already create
 # Start FastAPI server
 echo "Creating Django superuser..."
