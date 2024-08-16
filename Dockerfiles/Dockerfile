@@ -18,7 +18,11 @@ RUN pip install poetry && poetry config virtualenvs.create false
 
 # Install project dependencies
 RUN poetry install --no-root --no-ansi
+# Copy the requirements.txt file into the container
+COPY requirements.txt .
 
+# Install the dependencies from requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 # Copy the Django project files
 COPY myproject/ myproject/
 COPY myapp/ myapp/
