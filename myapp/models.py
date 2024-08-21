@@ -1,12 +1,20 @@
-from django.db import models
-from datetime import date
+from djongo import models
+from bson import ObjectId
+from django.contrib.auth.models import AbstractUser
+from django.core.exceptions import ValidationError
 
-class Student(models.Model):
-    email = models.EmailField(unique=True)
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
-    date_of_birth = models.DateField(default=None, blank=True, null=True)  # Allow null and blank
-    phone_number = models.CharField(max_length=15, blank=True, null=True)
+class User(AbstractUser):
+    _id = models.ObjectIdField(primary_key=True, default=ObjectId, editable=False)
+    is_student = models.BooleanField(default=False)
+    is_teacher = models.BooleanField(default=False)
 
-    def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+    def clean(self):
+        # Ensure only one of these flags is True
+        if self.is_student and self.is_teacher:
+            raise ValidationError("A user cannot be both a student and a teacher.")
+        super().clean()
+
+    def save(self, *args, **kwargs):
+        # Call clean() to validate model before saving
+        self.clean()
+        super().save(*args, **kwargs)

@@ -28,6 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = 'myapp.User'
 
 # Application definition
 
@@ -54,10 +55,17 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "myproject.urls"
 
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+
+SESSION_COOKIE_NAME = 'sessionid'
+
+
+TEMPLATE_DIR=os.path.join(BASE_DIR,'templates')
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [TEMPLATE_DIR,],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -123,16 +131,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-
-
-
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
-
-
-
-
 
 
 # Default primary key field type

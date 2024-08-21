@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Student
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from .models import User
 
-admin.site.register(Student)
-
+admin.site.register(User)
 

@@ -18,7 +18,11 @@ RUN pip install poetry && poetry config virtualenvs.create false
 
 # Install project dependencies
 RUN poetry install --no-root --no-ansi
+# Copy the requirements.txt file into the container
+# COPY requirements.txt .
 
+# Install the dependencies from requirements.txt
+# RUN pip install --no-cache-dir -r requirements.txt
 # Copy the Django project files
 COPY myproject/ myproject/
 COPY myapp/ myapp/
@@ -33,10 +37,10 @@ RUN chmod +x ./start.sh
 RUN python manage.py collectstatic --noinput
 # Expose the ports the apps run on
 EXPOSE 8000
-EXPOSE 8001
+EXPOSE 5000
 
 # List files for debugging 
 RUN ls -la /DJANGO_FASTAPI
 
 # Command to run the start script
-CMD ["./start.sh"]
+CMD ["start.sh"]
