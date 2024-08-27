@@ -6,7 +6,6 @@ class TeacherUpload(Document):
     user_id = IntField(required=True)
     teacher = StringField(required=True)
     pdf_file = FileField(required=True)
-    pkl_file = FileField(blank=True, null=True)
     uploaded_at = DateTimeField(default=datetime.now(timezone.utc))
 
     def __str__(self):
@@ -14,7 +13,7 @@ class TeacherUpload(Document):
 
 class Question(Document):
     user_id=IntField(required=True)
-    student = StringField(required=True)  # CASCADE equivalent
+    student = StringField(required=True)
     question_text = StringField(required=True)
     answer_text = StringField(blank=True, null=True)
     created_at = DateTimeField(default=datetime.now(timezone.utc))

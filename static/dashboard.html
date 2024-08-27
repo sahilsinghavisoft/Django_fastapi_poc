@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        .hidden { display: none; }
+        .container { max-width: 800px; }
+        .btn { margin-right: 10px; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">Demo</a>
+        <div class="d-flex ms-auto">
+            <button class="btn btn-light" onclick="window.location.href='/home/'">Home</button>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1 class="text-center">Dashboard</h1>
+        <div id="student-options" class="hidden">
+            <h2 class="text-center mt-4">Student Options</h2>
+            <div class="d-flex justify-content-center mt-3">
+                <a href="/generate-response" class="btn btn-primary">Access Generate Response</a>
+            </div>
+        </div>
+
+        <div id="teacher-options" class="hidden">
+            <h2 class="text-center mt-4">Teacher Options</h2>
+            <div class="d-flex justify-content-center mt-3">
+                <a href="/upload-pdf" class="btn btn-primary">Upload PDF</a>
+                <a href="/generate-response" class="btn btn-primary">Access Generate Response</a>
+            </div>
+        </div>
+
+        <div id="admin-options" class="hidden">
+            <h2 class="text-center mt-4">Admin Options</h2>
+            <div class="d-flex justify-content-center mt-3">
+                <a href="/upload-pdf" class="btn btn-primary">Upload PDF</a>
+                <a href="/generate-response" class="btn btn-primary">Access Generate Response</a>
+                <a href="/process-all-pdfs" class="btn btn-primary">Process PDFs</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Using the injected role
+        const userRole = "{{ role }}";
+
+        if (userRole === 'student') {
+            document.getElementById('student-options').classList.remove('hidden');
+        } else if (userRole === 'teacher') {
+            document.getElementById('teacher-options').classList.remove('hidden');
+        } else if (userRole === 'superuser') {
+            document.getElementById('admin-options').classList.remove('hidden');
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybCd5nni4YY5HGy3Np2fGY/ksA2tFM9p4pXTMFZgX/7rxE72O" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl7/3pEvBbk+0vTCfQp0hA5e5JqGZ0ZnZa4IJd4+U5" crossorigin="anonymous"></script>
+</body>
+</html>
